@@ -4,11 +4,9 @@ services:
     container_name: erepmax
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "6868:3000"
     volumes:
-      # Adjust this path to your NAS data directory
-      # Synology example: /volume1/docker/erepmax/data:/data
-      - ./data:/data
+      - /mnt/user/appdata/erepmax/data:/data
     environment:
       - DB_PATH=/data/erepmax.db
       - NODE_ENV=production
