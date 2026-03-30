@@ -20,16 +20,9 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV DB_PATH=/data/erepmax.db
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
-
-# Ensure the data directory exists and is writable
-RUN mkdir -p /data && chown appuser:appgroup /data
-
-USER appuser
 
 EXPOSE 3000
 
