@@ -102,7 +102,7 @@ export function getMaxWeightByReps(exerciseId: number): RepMax[] {
     .prepare(
       `SELECT reps, MAX(weight_kg) AS weight_kg
        FROM sets
-       WHERE exercise_id = ?
+       WHERE exercise_id = ? AND reps <= 15
        GROUP BY reps
        ORDER BY reps ASC`
     )
