@@ -27,6 +27,11 @@ export interface LogEntry {
   weight_kg: number;
 }
 
+export interface RepMax {
+  reps: number;
+  weight_kg: number;
+}
+
 export interface NewSetInput {
   exercise_id: number;
   logged_date: string;
@@ -89,6 +94,19 @@ export function getRecordsByExercise(exerciseId: number): OneRmRecord[] {
        ORDER BY logged_date ASC`
     )
     .all(exerciseId) as OneRmRecord[];
+}
+
+export function getMaxWeightByReps(exerciseId: number): RepMax[] {
+  const db = getDb();
+  return db
+    .prepare(
+      `SELECT reps, MAX(weight_kg) AS weight_kg
+       FROM sets
+       WHERE exercise_id = ?
+       GROUP BY reps
+       ORDER BY reps ASC`
+    )
+    .all(exerciseId) as RepMax[];
 }
 
 export function getEntriesByExercise(exerciseId: number): LogEntry[] {

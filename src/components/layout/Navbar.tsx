@@ -7,6 +7,7 @@ import UnitToggle from './UnitToggle';
 const links = [
   { href: '/', label: 'Dashboard' },
   { href: '/log', label: 'Log Set' },
+  { href: '/records', label: 'Records' },
   { href: '/exercises', label: 'Exercises' },
 ];
 
